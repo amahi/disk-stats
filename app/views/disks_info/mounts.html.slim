@@ -35,17 +35,17 @@
    		table.center
    			tr
    				td
-   					= "Free space:" 
+   					= "Free space:"
    				td
    					= number_to_human_size(free_space)
    			tr
    				td
-   					= "Used space:" 
+   					= "Used space:"
    				td
    					= number_to_human_size(used_space)
    			tr
    				td
-   					= "Total space:" 
+   					= "Total space:"
    				td
    					= number_to_human_size(total_space)
 
@@ -57,15 +57,15 @@
 				    	  h3.center_block
 				    		 = first[:mount]
 				    		 | &nbsp;&nbsp;&nbsp;
-				    		 = number_to_human_size first[:bytes] 
-			
+				    		 = number_to_human_size first[:bytes]
+
 			              = pie_chart({"Free: #{number_to_human_size first[:available]}" => first[:available], \
 			              "Used: #{number_to_human_size first[:used]}" => first[:used]},\
 			              library: {legend: {position: 'top'}, \
 			              is3D: true, \
 			              pieSliceText: 'percentage', \
 			              tooltip: {text: 'percentage' }, \
-			              width: 400, \
+			              chartArea: {'width' => '100%', 'height' => '90%'},\
 			              slices: [{color: '#A44585'},{color: '#00B5F0'}] \
 			              })
 	            	- if second
@@ -73,7 +73,7 @@
 	            			h3.center_block
 					    		 = second[:mount]
 					    		 | &nbsp;&nbsp;&nbsp;
-					    		 = number_to_human_size second[:bytes] 
+					    		 = number_to_human_size second[:bytes]
 
 				            = pie_chart({"Free: #{number_to_human_size second[:available]}" => second[:available], \
 				              "Used: #{number_to_human_size second[:used]}" => second[:used]},\
@@ -81,16 +81,15 @@
 				              is3D: true, \
 				              pieSliceText: 'percentage', \
 				              tooltip: {text: 'percentage' }, \
-				              width: 400, \
+				              chartArea: {'width' => '100%', 'height' => '90%'},\
 			              	  slices: [{color: '#A44585'},{color: '#00B5F0'}] \
 
 				              })
-	    		 
-	    			
-	    	
-	    		  	
+
+
+
+
    -else
 	    tr
 	      td colspan="6"
 	        strong No data returned
-
