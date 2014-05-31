@@ -1,4 +1,5 @@
-= Amahi plugin Disks
+Amahi Disks Stats Plugin
+========================
 
 [Disk stats plugin]() for the Amahi platform
 
