@@ -17,6 +17,12 @@
 }
 
 .td_box {
-	width: 40%;
+	width: 100%;
 }
 
+.center {
+    border: 1px solid #DFDFDF;
+    width: 80%;
+    margin: 20px auto;
+    border-radius: 5px 5px 0px 0px;
+}
