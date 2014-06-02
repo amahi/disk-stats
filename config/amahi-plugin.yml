@@ -2,5 +2,6 @@
 name: DisksInfo
 # class to be mounted
 class: DisksInfo
+kind: subtab
 # root url where this plugin will be mounted
 url: /tab/disks_info
