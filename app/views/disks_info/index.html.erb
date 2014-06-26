@@ -1,0 +1,100 @@
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+<%
+  color1 = @theme.gruff[:colors][0]
+  color2 = @theme.gruff[:colors][1]
+%>
+<div class="settings-table" id="disks-table">
+	<table class="settings">
+		<thead id="disk-table-head">
+			<tr>
+				<th class="settings-col1">Partition</th>
+				<th>Total</th>
+				<th>Free</th>
+				<th>Used</th>
+				<th><span class="translation_missing" title="translation missing: en.mount point">Mount Point</span></th>
+			</tr>
+		</thead>
+		<%
+		if @mounts.any?
+		total_space = 0
+		used_space = 0
+		free_space = 0
+		%>
+		<tbody id="disk-table-body">
+			<% @mounts.each do | mount |
+			total_space += mount[:bytes]
+			used_space += mount[:used]
+			free_space += mount[:available]
+			%>
+			<tr class=<%= cycle("odd", "even") %>>
+				<td class="settings-col1"><%= mount[:filesystem] %></td>
+				<td><%= number_to_human_size mount[:bytes] %></td>
+				<td><%= number_to_human_size mount[:available] %></td>
+				<td><%= number_to_human_size mount[:used] %>(<%= mount[:use_percent] %>)</td>
+				<td><%= mount[:mount] %></td>
+			</tr>
+			<% end %>
+			<% else %>
+			<tr>
+				<td colspan="6"> strong No data returned </td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<div class="partitions_summary center_block">
+		<table class="center">
+			<tbody>
+				<tr>
+					<td>Free space:</td><td><%= number_to_human_size(free_space) %></td>
+				</tr>
+				<tr>
+					<td>Used space:</td><td><%= number_to_human_size(used_space) %></td>
+				</tr>
+				<tr>
+					<td>Total space:</td><td><%= number_to_human_size(total_space) %></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<table style="width: 100%" width="100%">
+		<% if @mounts.any? %>
+		<% @mounts.each_slice(2) do | first, second | %>
+		<tr>
+			<td align="center" valign="middle" style="float: left;"><h3 class="center_block"> <%= first[:mount] %> &nbsp;&nbsp;&nbsp; <%= number_to_human_size first[:bytes] %> </h3> <%=
+ pie_chart({"Free: #{number_to_human_size first[:available]}" => first[:available], \
+			"Used: #{number_to_human_size first[:used]}" => first[:used]},
+			library: {legend: {position: 'top'},
+			is3D: true,
+			backgroundColor: 'transparent',
+			pieSliceText: 'percentage',
+			tooltip: {text: 'percentage' },
+			width: 300,
+			chartArea: {width: '95%', height: '80%'},
+			slices: [{color: color1},{color: color2}]})
+%> </td>
+
+			<% if second %>
+			<td align="center" valign="middle" style="float: right;"><h3 class="center_block"> <%= second[:mount] %> &nbsp;&nbsp;&nbsp; <%= number_to_human_size second[:bytes] %> </h3> <%=
+ pie_chart({"Free: #{number_to_human_size second[:available]}" => second[:available], \
+			"Used: #{number_to_human_size second[:used]}" => second[:used]},
+			library: {legend: {position: 'top'},
+			is3D: true,
+			backgroundColor: 'transparent',
+			pieSliceText: 'percentage',
+			tooltip: {text: 'percentage' },
+			width: 300,
+			chartArea: {width: '95%', height: '80%'},
+			slices: [{color: color1},{color: color2}]})
+%> </td>
+
+			<% end %>
+		</tr>
+		<% end %>
+		<% else %>
+		<tr>
+			<td colspan="6"> strong No data returned </td>
+		</tr>
+		<% end %>
+	</table>
+</div>

@@ -4,4 +4,4 @@ name: DisksInfo
 class: DisksInfo
 kind: subtab
 # root url where this plugin will be mounted
-url: /tab/disks_info
+url: /tab/disks/disks_info
