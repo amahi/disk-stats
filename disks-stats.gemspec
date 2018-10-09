@@ -11,13 +11,13 @@ Gem::Specification.new do |s|
   s.email       = ["slm4996+git@gmail.com"]
   s.homepage    = "http://www.amahi.org/"
   s.license     = "AGPLv3"
-  s.summary     = %{Disk information for the Amahi iplatform(Enhanced).}
-  s.description = %{This is an Amahi 7 platform plugin that allows the viewing of disk related information(Enhanced).}
+  s.summary     = %{Disk information for the Amahi platform.}
+  s.description = %{This is an Amahi platform plugin that allows the viewing of disk related information(Enhanced).}
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", "~> 3.2.12"
+  s.add_dependency "rails", "~> 5.2.0"
   s.add_dependency "jquery-rails"
 
   s.add_development_dependency "sqlite3"
